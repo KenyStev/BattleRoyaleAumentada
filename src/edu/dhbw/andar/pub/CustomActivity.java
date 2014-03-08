@@ -42,10 +42,10 @@ public class CustomActivity extends AndARActivity {
 
 	CustomObject someObject;
 	ARToolkit artoolkit;
-	Model3D monstruo1;
+	MiCharacter monstruo1;
 	MiCharacter monstruo2;
-	
-	HP hp;
+	HP Hp;
+	HP Hp2;
 	
 	Menu menu;
 	
@@ -60,16 +60,19 @@ public class CustomActivity extends AndARActivity {
 		{
 			artoolkit = super.getArtoolkit();
 
-			monstruo1 = new Model3D(getModel("monstruo1.obj"),"c2.patt");
+			Hp = new HP(getModel("hp.obj"),"c2.patt");
+			monstruo1 = new MiCharacter(getModel("monstruo1.obj"),"c2.patt", Hp);
 			artoolkit.registerARObject(monstruo1);
+			artoolkit.registerARObject(monstruo1.hp);
+			monstruo1.hp.model.setYpos(5f);
 			
-			Model3D selected = new Model3D(getModel("selected.obj"),"e2.patt");
-			hp = new HP(getModel("hp.obj"),"e2.patt");
-			monstruo2 = new MiCharacter(getModel("monstruo2.obj"),"e2.patt",selected);
+			//Model3D selected = new Model3D(getModel("selected.obj"),"e2.patt");
+			Hp2 = new HP(getModel("hp.obj"), "e2.patt");
+			monstruo2 = new MiCharacter(getModel("monstruo2.obj"),"e2.patt", Hp);
 			artoolkit.registerARObject(monstruo2);
-			artoolkit.registerARObject(selected);
-			artoolkit.registerARObject(hp);
-			hp.model.setYpos(5f);
+			artoolkit.registerARObject(monstruo2.hp);
+			//artoolkit.registerARObject(selected);
+			monstruo2.hp.model.setYpos(5f);
 
 //			someObject = new CustomObject
 //			("test", "e2.patt", 80.0, new double[]{0,0});
@@ -132,9 +135,9 @@ public class CustomActivity extends AndARActivity {
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
 	 */
-	@Override
+	/*@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		/*if(item.getItemId()==1) {
+		if(item.getItemId()==1) {
 			artoolkit.unregisterARObject(someObject);
 		} else if(item.getItemId()==0) {
 			try {
@@ -144,7 +147,9 @@ public class CustomActivity extends AndARActivity {
 			} catch (AndARException e) {
 				e.printStackTrace();
 			}
-		}*/
+			
+			
+		}
 		switch(item.getItemId()) {
 		case MENU_SCREENSHOT:
 			new TakeAsyncScreenshot().execute();
@@ -152,7 +157,7 @@ public class CustomActivity extends AndARActivity {
 		}
 		return true;
 	}
-	
+	*/
 	class TakeAsyncScreenshot extends AsyncTask<Void, Void, Void> {
 		
 		private String errorMsg = null;
@@ -199,7 +204,7 @@ public class CustomActivity extends AndARActivity {
 			monstruo2.model.scale=8;
 			monstruo2.selected.model.scale=4;
 			monstruo1.model.scale=4;
-			hp.decrese(10);
+			monstruo2.hp.decrese(10);
 		}
 		return true;
 	}

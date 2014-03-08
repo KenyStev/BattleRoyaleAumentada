@@ -9,6 +9,7 @@ import edu.dhbw.andobjviewer.models.Model;
 public class HP extends Model3D{
 	int maximum=100;
 	int current=100;
+	
 	public HP(Model model, String pattern_file) {
 		super(model, pattern_file);
 		// TODO Auto-generated constructor stub
